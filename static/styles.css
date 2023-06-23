@@ -1,0 +1,77 @@
+body{
+    background-color: #4FC3F7;
+}
+.page {
+    width: 100vw;
+    background: #4FC3F7;
+    /* background: #4FC3F7    ; */
+    /* min-height: 1000px; */
+    position: relative;
+    height: 100vh;
+    /* min-height: min-content; */
+    /* overflow-y: auto; */
+    /* height: 1000px; */
+    /* height: 97vh; */
+    /* display: flex; */
+    /* align-items: center; */
+    justify-content: center;
+    /* box-sizing: border-box; */
+}
+.page .search{
+    position: relative;
+    width: 60%;
+    top: 5%;
+    margin: 0 auto;
+    /* justify-content: center; */
+    display: flex;
+}
+.page .search input{
+    position:relative;
+    width: 100%;
+    font-size: 25px;
+    /* font-weight: bo; */
+    height: 70px;
+    padding: 0 25px 0 25px;
+    border-radius: 15px;
+}
+.page .table{
+    position: relative;
+    background: white;
+    border-radius: 25px 25px 25px 25px;
+    width: 60%;
+    top: 15%;
+    /* height: 1000px; */
+    margin: 0 auto;
+    height: 70%;
+    overflow-y: scroll;
+    padding: 2vh 1vw;
+}
+
+.page .table::-webkit-scrollbar{
+    display: none;
+}
+
+.page .table .table_element{
+    cursor: pointer;
+    position: relative;
+    width: 96%;
+    height: 22.5%;
+    border-radius: 5px;
+    background: #E0EDF2;
+    margin-bottom: 2vh;
+    border-left: 5px solid red;
+    color: #050140;
+    padding: 1% 2%;
+}
+.page .table .table_element.completed{
+    border-left: 5px solid green;
+}
+.page .table .table_element .job_name{
+    font-size: 250%;
+    /* margin-bottom: 1vh; */
+    /* margin-top: -10%; */
+}
+.page .table .table_element .company_name{
+    font-size: 150%;
+    /* margin-bottom: 1vh; */
+}

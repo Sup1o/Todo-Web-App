@@ -1,0 +1,2 @@
+clean floor,0
+wash dishes,1

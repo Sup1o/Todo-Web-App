@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    
+</head>
+<body>
+    <div class="page" >
+        <form action="{{ url_for('add_task') }}" method="POST" class="search">
+            <input type="text" name="title" placeholder="Task Title" required>
+            <input type="submit" value="Add Task" style="width: 25%;">
+        </form>
+        <div class="table" id="TableBody">
+            {% for task in tasks %}
+                <div class="table_element {% if task.completed %}completed{% endif %}">
+                    <p class="job_name">{{ task.title }}</p>
+                    <p class="company_name">{{ task.description }}</p>                    
+                </div>
+            {% endfor%}
+        </div>    
+    </div>
+    
+    
+    
+</body>
+<script>
+    function addRowListeners() {
+        const rows = document.querySelectorAll("#TableBody .table_element");
+        rows.forEach((row, index) => {
+            row.addEventListener("click", () => {
+                const company = row.querySelector('.company_name').textContent;
+                const jobName = row.querySelector('.job_name').textContent;
+
+                fetch(`/toggle_task/${index}`, { method: 'GET' })
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            throw new Error('Error toggling task status');
+                        }
+                    })
+                    .then(data => {
+                        const statusElement = row.querySelector('.status');
+                        if (data.completed) {
+                            row.classList.add('completed');
+                        } else {
+                            row.classList.remove('completed');
+                        }
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            });
+
+            row.addEventListener("contextmenu", (event) => {
+                event.preventDefault();
+                fetch(`/remove/${index}`, { method: 'GET' })
+                    .then(response => {
+                        if (response.ok) {
+                            row.remove();
+                        } else {
+                            throw new Error('Error removing task');
+                        }
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            });
+        });
+    }
+
+    addRowListeners();
+</script>
+
+
+</html>
